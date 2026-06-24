@@ -17,6 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Pobierz kod
         uses: actions/checkout@v4
@@ -34,6 +35,8 @@ jobs:
 
       - name: Przygotowanie GitHub Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Wgranie plików strony
         uses: actions/upload-pages-artifact@v3
@@ -44,8 +47,10 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
     needs: build
+
     steps:
       - name: Publikacja na GitHub Pages
         id: deployment
